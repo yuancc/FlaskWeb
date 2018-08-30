@@ -37,7 +37,7 @@ def index():
     msg = Message(subject="我是葛松", sender=os.environ.get('MAIL_USERNAME'),
                   recipients=[os.environ.get('MAIL_USERNAME')])
     msg.body = 'testing'
-    msg.html = '<b>Flask Chapter6</b>'
+    #msg.html = '<b>Flask Chapter6</b>'
     thread = Thread(target=send_async_email, args=[app, msg])
     thread.start()
     return '<h1>邮件发送成功</h1>'

@@ -1,6 +1,6 @@
 '''这一章最后没有看完，直接看下一章了'''
 
-from flask import Flask
+'''from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 
@@ -36,4 +36,26 @@ class User(db.Model):
 
 db.create_all()
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)'''
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
+
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:MySQL#232@127.0.0.1:3305/FlaskWebLearning'
+db = SQLAlchemy(app)
+manager = Manager(app)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+
+if __name__ == '__main__':
+    manager.run()
